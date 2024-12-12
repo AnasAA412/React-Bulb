@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import styled from "styled-components";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [isOn, setIsOn] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div>
+        <RoundedDiv design={isOn ? "TurnOn" : "TurnOff"}></RoundedDiv>
+        <button className="btn" onClick={() => setIsOn(!isOn)}>
+          {isOn ? "Turn Off" : "Turn On"}
+        </button>
+        <h2>React Bulb</h2>
+      </div>
     </div>
   );
-}
+};
+
+const RoundedDiv = styled.div`
+  height: 220px;
+  width: 140px;
+  border-radius: 60px;
+
+  ${(props) => {
+    switch (props.design) {
+      case "TurnOff":
+        return `background-color: gray;`;
+      case "TurnOn":
+        return `background-color: red;`;
+    }
+  }}
+`;
 
 export default App;
